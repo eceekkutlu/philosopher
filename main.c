@@ -45,7 +45,6 @@ static int init_table(t_table *table, t_philo **philo, int n)
     table->philo_count = n;
     table->died = 0;
     table->start = get_time_ms();
-    table->think = 1;
     table->fork = malloc(sizeof(t_fork) * n);
     if (!table->fork)
         return (1);
@@ -84,11 +83,8 @@ static void cleanup_table(t_table *table, t_philo *philo)
     free(table->fork);
 }
 
-int main(int argc, char **argv)
+static int arg_control(t_table *table, int *n, int argc, char **argv)
 {
-    t_table table;
-    t_philo *philo;
-    int n;
     int must_eat;
 
     if (argc != 5 && argc != 6)
@@ -96,14 +92,15 @@ int main(int argc, char **argv)
         fprintf(stderr, "usage: ./philo number_of_philosophers time_to_die time_to_eat time_to_sleep [number_of_times_each_philosopher_must_eat]\n");
         return (1);
     }
-    if (!parse_positive_int(argv[1], &n)
-        || !parse_positive_int(argv[2], &table.die)
-        || !parse_positive_int(argv[3], &table.eat)
-        || !parse_positive_int(argv[4], &table.sleep))
+    if (!parse_positive_int(argv[1], n)
+        || !parse_positive_int(argv[2], &table->die)
+        || !parse_positive_int(argv[3], &table->eat)
+        || !parse_positive_int(argv[4], &table->sleep))
     {
         fprintf(stderr, "invalid arguments: only positive integers are allowed\n");
         return (1);
     }
+    table->must_eat = -1;
     if (argc == 6)
     {
         if (!parse_positive_int(argv[5], &must_eat))
@@ -111,18 +108,25 @@ int main(int argc, char **argv)
             fprintf(stderr, "invalid must_eat argument\n");
             return (1);
         }
-        (void)must_eat;
+        table->must_eat = must_eat;
     }
+    return (0);
+}
 
+int main(int argc, char **argv)
+{
+    t_table table;
+    t_philo *philo;
+    int n;
+
+    if (arg_control(&table, &n, argc, argv))
+        return (1);
     if (init_table(&table, &philo, n))
     {
         fprintf(stderr, "fork init failed\n");
         return (1);
     }
 
-    table.die = table.die;
-    table.eat = table.eat;
-    table.sleep = table.sleep;
     init_philo(philo, &table);
 
     create_philo(philo, n);

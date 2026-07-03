@@ -33,5 +33,6 @@ void	set_meal(t_philo *philo)
 
 	pthread_mutex_lock(&philo->table->state_lock);
 	philo->last_meal = get_time_ms();
+	philo->meals_eaten++;
 	pthread_mutex_unlock(&philo->table->state_lock);
 }
