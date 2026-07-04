@@ -1,6 +1,16 @@
-#include "plo.h"
-#include <stdio.h>
-#include <unistd.h>
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   create_func.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: zkutlu <zkutlu@student.42istanbul.com.t    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/07/03 23:45:41 by zkutlu            #+#    #+#             */
+/*   Updated: 2026/07/04 05:26:08 by zkutlu           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "philo.h"
 
 void	create_philo(t_philo *philo, int count)
 {

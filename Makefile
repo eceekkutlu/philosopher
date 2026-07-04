@@ -16,7 +16,7 @@ all: $(NAME)
 $(NAME): $(OBJS)
 	$(CC) $(CFLAGS) $(OBJS) $(LDFLAGS) -o $(NAME)
 
-%.o: %.c plo.h
+%.o: %.c philo.h
 	$(CC) $(CFLAGS) -c $< -o $@
 
 clean:
