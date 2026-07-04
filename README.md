@@ -73,14 +73,15 @@ Example:
 
 ```text
 philosopher/
-├── main.c
-├── create_func.c
-├── for_died.c
-├── utils.c
-├── write_func.c
-├── philo.h
-├── Makefile
-└── README.md
+├── README.md
+└── philo/
+	├── Makefile
+	├── create_func.c
+	├── for_died.c
+	├── main.c
+	├── philo.h
+	├── utils.c
+	└── write_func.c
 ```
 
 ## Resources
