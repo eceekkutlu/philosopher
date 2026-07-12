@@ -87,6 +87,8 @@ void	*routine(void *arg)
 	t_philo	*philo;
 
 	philo = (t_philo *)arg;
+	if (philo->id % 2 == 0)
+		usleep(1000);
 	if (philo->table->philo_count == 1)
 	{
 		pthread_mutex_lock(&philo->left_fork->mutex);

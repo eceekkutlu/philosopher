@@ -71,6 +71,7 @@ long	get_time_ms(void);
 int		is_dead(t_table *table);
 void	set_dead(t_table *table);
 void	set_meal(t_philo *philo);
+void	reset_meal_times(t_philo *philo);
 void	detection_died(t_philo *philo);
 int		arg_control(t_table *table, int *n,
 			int argc, char **argv);

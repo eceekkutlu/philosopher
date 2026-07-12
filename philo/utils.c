@@ -45,3 +45,20 @@ void	set_meal(t_philo *philo)
 	philo->meals_eaten++;
 	pthread_mutex_unlock(&philo->table->state_lock);
 }
+
+void	reset_meal_times(t_philo *philo)
+{
+	int		i;
+	long	start;
+
+	i = 0;
+	start = get_time_ms();
+	pthread_mutex_lock(&philo->table->state_lock);
+	philo->table->start = start;
+	while (i < philo->table->philo_count)
+	{
+		philo[i].last_meal = start;
+		i++;
+	}
+	pthread_mutex_unlock(&philo->table->state_lock);
+}
