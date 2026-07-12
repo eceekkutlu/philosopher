@@ -102,6 +102,7 @@ int	main(int argc, char **argv)
 		return (1);
 	}
 	init_philo(philo, &table);
+	reset_meal_times(philo);
 	create_philo(philo, n);
 	detection_died(philo);
 	join_threads(philo);

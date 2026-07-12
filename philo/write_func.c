@@ -47,6 +47,8 @@ void	for_thinking(t_philo *philo)
 		think_time = 0;
 	if (think_time > 600)
 		think_time = 200;
+	if (philo->table->philo_count % 2 != 0)
+		think_time += 1;
 	usleep(think_time * 1000);
 }
 
