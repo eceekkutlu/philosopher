@@ -31,15 +31,20 @@ static int	is_positive_number(char *str)
 int	parse_positive_int(char *str, int *out)
 {
 	long	value;
-	char	*end_ptr;
+	int		i;
 
 	if (!is_positive_number(str))
 		return (0);
-	errno = 0;
-	value = strtol(str, &end_ptr, 10);
-	if (errno != 0 || *end_ptr != '\0')
-		return (0);
-	if (value <= 0 || value > INT_MAX)
+	value = 0;
+	i = 0;
+	while (str[i])
+	{
+		value = value * 10 + (str[i] - '0');
+		if (value > INT_MAX)
+			return (0);
+		i++;
+	}
+	if (value <= 0)
 		return (0);
 	*out = (int)value;
 	return (1);
